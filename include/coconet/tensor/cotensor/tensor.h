@@ -1,0 +1,9 @@
+#ifndef COCONET_TENSOR_COTENSOR_TENSOR_H_
+#define COCONET_TENSOR_COTENSOR_TENSOR_H_
+
+namespace coconet
+{
+
+}
+
+#endif // !COCONET_TENSOR_COTENSOR_TENSOR_H_
