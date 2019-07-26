@@ -1,5 +1,5 @@
-#ifndef COCONET_TENSOR_INDEX_H_
-#define COCONET_TENSOR_INDEX_H_
+#ifndef COCONET_TENSOR_TENSOR_INDEX_H_
+#define COCONET_TENSOR_TENSOR_INDEX_H_
 
 #include <cstdint>
 #include <cstring>

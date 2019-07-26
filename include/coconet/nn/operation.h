@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <coconet/core/tensor.h>
+#include <coconet/tensor/tensor.h>
 
 namespace coconet
 {

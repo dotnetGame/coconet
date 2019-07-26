@@ -10,8 +10,6 @@ set(CORE_LIST
     ${SOURCE_PATH}/variable.cpp
     ${HEADER_PATH}/allocator.h
     ${SOURCE_PATH}/allocator.cpp
-    ${HEADER_PATH}/tensor.h
-    ${SOURCE_PATH}/tensor.cpp
 )
 
 add_library(${LIB_OUTNAME} ${CORE_LIST})

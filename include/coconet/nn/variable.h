@@ -5,7 +5,7 @@
 #include <initializer_list>
 
 #include <coconet/core/type.h>
-#include <coconet/core/tensor.h>
+#include <coconet/tensor/tensor.h>
 #include <coconet/nn/operation.h>
 
 namespace coconet

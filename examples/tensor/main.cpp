@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include <coconet/tensor/cotensor/index.h>
+#include <coconet/tensor/index.h>
 
 
 int main()
