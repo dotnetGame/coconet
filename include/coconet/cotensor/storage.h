@@ -88,6 +88,7 @@ namespace coconet
 		std::memcpy(temp._data, other._data, other._len * sizeof(T));
 
 		this->swap(temp);
+		return *this;
 	}
 	template<class T>
 	inline CoTensorStorage<T> & CoTensorStorage<T>::operator=(CoTensorStorage<T> && other)
