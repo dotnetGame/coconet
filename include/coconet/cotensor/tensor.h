@@ -41,11 +41,15 @@ namespace coconet
 		CoTensor& operator= (CoTensor&& other) = delete;
 
 	public:
+		T* data_ptr();
+		const T* data_ptr() const;
 		device_id device();
 		DataType dtype() const;
 		bool equal(const ITensor& other) const;
+		bool is_contiguous() const;
 
 		idx_type ndimension() const;
+		idx_type numel() const;
 		idx_type offset() const;
 		PlatformType platform() const;
 		DimVector size() const;
@@ -94,6 +98,16 @@ namespace coconet
 	{
 	}
 	template<class T>
+	inline T * CoTensor<T>::data_ptr()
+	{
+		return _rep->data_ptr();
+	}
+	template<class T>
+	inline const T * CoTensor<T>::data_ptr() const
+	{
+		return _rep->data_ptr();
+	}
+	template<class T>
 	inline device_id CoTensor<T>::device()
 	{
 		return 0;
@@ -103,10 +117,34 @@ namespace coconet
 	{
 		return false;
 	}
+
+	/*
+	Returns True if self tensor is contiguous in memory in C order.
+	*/
+	template<class T>
+	inline bool CoTensor<T>::is_contiguous() const
+	{
+		if (stride(-1) != 1)
+			return false;
+
+		for (idx_type i = ndimension() - 1; i > 0; --i)
+		{
+			if (size(i) * stride(i) != stride(i - 1))
+				return false;
+		}
+
+		return true;
+	}
+
 	template<class T>
 	inline idx_type CoTensor<T>::ndimension() const
 	{
-		return _dimensions.size();
+		return static_cast<idx_type>(_dimensions.size());
+	}
+	template<class T>
+	inline idx_type CoTensor<T>::numel() const
+	{
+		return idx_type();
 	}
 	template<class T>
 	inline idx_type CoTensor<T>::offset() const
@@ -129,7 +167,7 @@ namespace coconet
 		auto shape_size = _dimensions.size();
 		if (i >= 0 && i < _dimensions.size())
 			return _dimensions[i];
-		else if (i <= -1 && i >= -_dimensions.size())
+		else if (i <= -1 && i >= -static_cast<idx_type>(_dimensions.size()))
 			return _dimensions[shape_size + i];
 		else
 			throw std::runtime_error("Dimension out of range");
@@ -145,7 +183,7 @@ namespace coconet
 		auto shape_size = _strides.size();
 		if (i >= 0 && i < _strides.size())
 			return _strides[i];
-		else if (i <= -1 && i >= -_strides.size())
+		else if (i <= -1 && i >= -static_cast<idx_type>(_strides.size()))
 			return _strides[shape_size + i];
 		else
 			throw std::runtime_error("Dimension out of range");

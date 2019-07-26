@@ -6,8 +6,6 @@ set(SOURCE_PATH ${COCONET_PATH_SOURCE}/${LIB_NAME})
 
 set(CORE_LIST
     ${HEADER_PATH}/type.h
-    ${HEADER_PATH}/variable.h
-    ${SOURCE_PATH}/variable.cpp
     ${HEADER_PATH}/allocator.h
     ${SOURCE_PATH}/allocator.cpp
 )

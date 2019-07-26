@@ -9,6 +9,10 @@ SET(TENSOR_LIST
 	${SOURCE_PATH}/tensor.cpp
 	${HEADER_PATH}/index.h
 	${SOURCE_PATH}/index.cpp
+	${HEADER_PATH}/allocator.h
+	${SOURCE_PATH}/allocator.cpp
+	${HEADER_PATH}/storage.h
+	${SOURCE_PATH}/storage.cpp
 )
 
 ADD_LIBRARY(${LIB_OUTNAME} ${TENSOR_LIST})

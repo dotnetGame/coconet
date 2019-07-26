@@ -21,13 +21,17 @@ namespace coconet
 		idx_type _len;
 	public:
 		CoTensorStorage();
+		CoTensorStorage(idx_type size, T value = T());
 		CoTensorStorage(const CoTensorStorage& other);
 		CoTensorStorage(CoTensorStorage&& other);
 		~CoTensorStorage();
 		CoTensorStorage& operator= (const CoTensorStorage& other);
 		CoTensorStorage& operator= (CoTensorStorage&& other);
-
+		
+		T* data_ptr() noexcept;
+		const T* data_ptr() const noexcept;
 		void swap(CoTensorStorage& other) noexcept;
+		void resize(idx_type s);
 	};
 
 	template class CoTensorStorage<f32>;
@@ -50,6 +54,18 @@ namespace coconet
 	inline CoTensorStorage<T>::CoTensorStorage()
 		: _data(nullptr), _len(0)
 	{
+	}
+
+	template<class T>
+	inline CoTensorStorage<T>::CoTensorStorage(idx_type size, T value)
+		: _data(nullptr), _len(0)
+	{
+		if (size > 0)
+		{
+			_data = new T[size];
+			_len = size;
+			std::fill(_data, _data + size, value);
+		}
 	}
 
 	template<class T>
@@ -100,10 +116,40 @@ namespace coconet
 	}
 
 	template<class T>
+	inline T * CoTensorStorage<T>::data_ptr() noexcept
+	{
+		return _data;
+	}
+
+	template<class T>
+	inline const T * CoTensorStorage<T>::data_ptr() const noexcept
+	{
+		return _data;
+	}
+
+	template<class T>
 	inline void CoTensorStorage<T>::swap(CoTensorStorage & other) noexcept
 	{
 		std::swap(_data, other._data);
 		std::swap(_len, other._len);
+	}
+
+	template<class T>
+	inline void CoTensorStorage<T>::resize(idx_type s)
+	{
+		if (s >= 0 && s != _len)
+		{
+			CoTensorStorage temp;
+			temp._data = new T[s];
+			temp._len = s;
+
+			if (s > _len)
+				std::memcpy(temp._data, _data, _len * sizeof(T));
+			else
+				std::memcpy(temp._data, _data, s * sizeof(T));
+			
+			this->swap(temp);
+		}
 	}
 }
 
