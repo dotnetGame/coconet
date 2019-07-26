@@ -13,4 +13,6 @@ SET(TENSOR_LIST
 
 ADD_LIBRARY(${LIB_OUTNAME} ${TENSOR_LIST})
 
+target_link_libraries(${LIB_OUTNAME} coconet-tensor)
+target_link_libraries(${LIB_OUTNAME} coconet-util)
 

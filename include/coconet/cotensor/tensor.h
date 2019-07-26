@@ -1,9 +1,13 @@
-#ifndef COCONET_TENSOR_COTENSOR_TENSOR_H_
-#define COCONET_TENSOR_COTENSOR_TENSOR_H_
+#ifndef COCONET_COTENSOR_TENSOR_H_
+#define COCONET_COTENSOR_TENSOR_H_
+
+#include <memory>
 
 #include <coconet/core/type.h>
 #include <coconet/tensor/tensor.h>
 #include <coconet/tensor/index.h>
+
+#include <coconet/cotensor/storage.h>
 
 namespace coconet
 {
@@ -20,11 +24,14 @@ namespace coconet
 		using shared_pointer = std::shared_ptr<self_type>;
 		using reference = self_type & ;
 		using const_reference = const self_type&;
+	private:
+		std::unique_ptr<CoTensorStorage<T>> _rep;
+		DimVector _dimensions;
+		StrideVector _strides;
 	public:
 		CoTensor();
 		explicit CoTensor(const DimVector& dimensions);
-		explicit CoTensor(const DimVector& dimensions, const DimVector& strides);
-		CoTensor(const T& t);
+		explicit CoTensor(const DimVector& dimensions, const StrideVector& strides);
 
 		CoTensor(const CoTensor& other) = delete;
 		CoTensor(CoTensor&& other) = delete;
@@ -55,18 +62,15 @@ namespace coconet
 
 	template<class T>
 	inline CoTensor<T>::CoTensor(const DimVector & dimensions)
+		: _dimensions(dimensions)
 	{
 	}
 
 	template<class T>
-	inline CoTensor<T>::CoTensor(const DimVector & dimensions, const DimVector & strides)
-	{
-	}
-
-	template<class T>
-	inline CoTensor<T>::CoTensor(const T & t)
+	inline CoTensor<T>::CoTensor(const DimVector & dimensions, const StrideVector & strides)
+		:_dimensions(dimensions), _strides(strides)
 	{
 	}
 }
 
-#endif // !COCONET_TENSOR_COTENSOR_TENSOR_H_
+#endif // !COCONET_COTENSOR_TENSOR_H_

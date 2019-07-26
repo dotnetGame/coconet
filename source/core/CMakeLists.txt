@@ -12,4 +12,8 @@ set(CORE_LIST
     ${SOURCE_PATH}/allocator.cpp
 )
 
-add_library(${LIB_OUTNAME} ${CORE_LIST})
+add_library(${LIB_OUTNAME} STATIC ${CORE_LIST})
+
+target_link_libraries(${LIB_OUTNAME} coconet-util)
+target_link_libraries(${LIB_OUTNAME} coconet-tensor)
+target_link_libraries(${LIB_OUTNAME} coconet-cotensor)
