@@ -2,6 +2,7 @@
 #define COCONET_COTENSOR_APPLY_H_
 
 #include <coconet/cotensor/tensor.h>
+#include <xsimd/xsimd.hpp>
 
 namespace coconet
 {

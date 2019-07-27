@@ -1,0 +1,6 @@
+[submodule "contrib/taskflow"]
+	path = contrib/taskflow
+	url = https://github.com/cpp-taskflow/cpp-taskflow.git
+[submodule "contrib/xsimd"]
+	path = contrib/xsimd
+	url = https://github.com/QuantStack/xsimd.git
