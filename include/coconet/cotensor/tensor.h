@@ -26,7 +26,7 @@ namespace coconet
 		using reference = self_type & ;
 		using const_reference = const self_type&;
 	private:
-		std::unique_ptr<CoTensorStorage<T>> _rep;
+		std::unique_ptr<CoTensorStorage> _rep;
 		DimVector _dimensions;
 		StrideVector _strides;
 		idx_type _offset;
@@ -100,12 +100,12 @@ namespace coconet
 	template<class T>
 	inline T * CoTensor<T>::data_ptr()
 	{
-		return _rep->data_ptr();
+		return reinterpret_cast<T*>(_rep->data_ptr());
 	}
 	template<class T>
 	inline const T * CoTensor<T>::data_ptr() const
 	{
-		return _rep->data_ptr();
+		return reinterpret_cast<T*>(_rep->data_ptr());
 	}
 	template<class T>
 	inline device_id CoTensor<T>::device()

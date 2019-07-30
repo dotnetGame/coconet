@@ -9,10 +9,14 @@ namespace coconet
     class Storage
     {
     public:
+		Storage(std::unique_ptr<Allocator> allocator)
+			: _buffer(nullptr)
+		{
 
+		}
     private:
 		std::unique_ptr<Allocator> _allocator;
-		std::unique_ptr<char, BufferDeleter> _buffer;
+		char* _buffer;
 	};
 }
 

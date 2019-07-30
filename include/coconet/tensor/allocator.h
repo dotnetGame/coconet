@@ -17,6 +17,16 @@ namespace coconet
 		idx_type len;
 	};
 
+	class Allocator
+	{
+	public:
+		virtual char* allocate(idx_type size) = 0;
+		virtual void deallocate(char* ptr) = 0;
+	private:
+
+	};
+
+/*
 	struct BufferDeleter
 	{
 	public:
@@ -31,15 +41,8 @@ namespace coconet
 	private:
 		Allocator* _alloc;
 	};
-
-    class Allocator
-    {
-    public:
-		virtual char* allocate(idx_type size) = 0;
-		virtual void deallocate(char* ptr) = 0;
-    private:
+*/
     
-	};
 }
 
 #endif //! COCONET_TENSOR_ALLOCATOR_H_

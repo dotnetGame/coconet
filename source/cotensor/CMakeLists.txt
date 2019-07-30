@@ -12,6 +12,8 @@ SET(TENSOR_LIST
     ${SOURCE_PATH}/storage.cpp
     ${HEADER_PATH}/math.h
     ${SOURCE_PATH}/math.cpp
+    ${HEADER_PATH}/allocator.h
+    ${SOURCE_PATH}/allocator.cpp
 )
 
 ADD_LIBRARY(${LIB_OUTNAME} ${TENSOR_LIST})
