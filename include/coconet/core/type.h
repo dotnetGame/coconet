@@ -45,6 +45,29 @@ namespace coconet
         FLOAT,
         DOUBLE
     };
+
+	std::int32_t dtype_size(DataType dtype)
+	{
+		switch (dtype)
+		{
+		case DataType::BYTE:
+			return sizeof(u8);
+		case DataType::CHAR:
+			return sizeof(i8);
+		case DataType::DOUBLE:
+			return sizeof(f64);
+		case DataType::FLOAT:
+			return sizeof(f32);
+		case DataType::INT:
+			return sizeof(i32);
+		case DataType::LONG:
+			return sizeof(i64);
+		case DataType::SHORT:
+			return sizeof(i16);
+		default:
+			break;
+		}
+	}
 }
 
 
