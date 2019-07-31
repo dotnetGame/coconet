@@ -69,6 +69,41 @@ namespace coconet
 		std::swap(_allocator, other._allocator);
 	}
 
+	void CoTensorStorage::to_byte()
+	{
+		_dtype = DataType::BYTE;
+	}
+
+	void CoTensorStorage::to_char()
+	{
+		_dtype = DataType::CHAR;
+	}
+
+	void CoTensorStorage::to_short()
+	{
+		_dtype = DataType::SHORT;
+	}
+
+	void CoTensorStorage::to_int()
+	{
+		_dtype = DataType::INT;
+	}
+
+	void CoTensorStorage::to_long()
+	{
+		_dtype = DataType::LONG;
+	}
+
+	void CoTensorStorage::to_float()
+	{
+		_dtype = DataType::FLOAT;
+	}
+
+	void CoTensorStorage::to_double()
+	{
+		_dtype = DataType::DOUBLE;
+	}
+
 	inline DataType CoTensorStorage::dtype() const
 	{
 		return _dtype;

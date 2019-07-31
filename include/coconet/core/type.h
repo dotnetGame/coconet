@@ -46,7 +46,7 @@ namespace coconet
         DOUBLE
     };
 
-	std::int32_t dtype_size(DataType dtype)
+	inline std::int32_t dtype_size(DataType dtype)
 	{
 		switch (dtype)
 		{
@@ -65,7 +65,7 @@ namespace coconet
 		case DataType::SHORT:
 			return sizeof(i16);
 		default:
-			break;
+			return 0;
 		}
 	}
 }

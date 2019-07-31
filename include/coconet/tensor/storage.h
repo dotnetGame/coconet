@@ -10,14 +10,24 @@ namespace coconet
     class Storage
     {
     public:
-		
-		virtual char* data_ptr() noexcept = 0;
-		virtual const char* data_ptr() const noexcept = 0;
-		virtual DataType dtype() const = 0;
 
+		// convert
+		virtual void to_byte() = 0;
+		virtual void to_char() = 0;
+		virtual void to_short() = 0;
+		virtual void to_int() = 0;
+		virtual void to_long() = 0;
+		virtual void to_float() = 0;
+		virtual void to_double() = 0;
+		// info
+		virtual char* data_ptr() = 0;
+		virtual const char* data_ptr() const = 0;
+		virtual DataType dtype() const = 0;
 		virtual PlatformType platform() const = 0;
-		virtual void resize_(idx_type n) = 0;
 		virtual std::int32_t element_size() const = 0;
+
+		// manipulate
+		virtual void resize_(idx_type n) = 0;
 	};
 }
 

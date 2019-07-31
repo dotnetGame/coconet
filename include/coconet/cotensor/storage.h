@@ -25,11 +25,23 @@ namespace coconet
 		
 		void swap(CoTensorStorage& other) noexcept;
 
+		// convert
+		virtual void to_byte() override;
+		virtual void to_char() override;
+		virtual void to_short() override;
+		virtual void to_int() override;
+		virtual void to_long() override;
+		virtual void to_float() override;
+		virtual void to_double() override;
+
+		// info
 		virtual char* data_ptr() noexcept override;
 		virtual const char* data_ptr() const noexcept override;
 		virtual DataType dtype() const override;
 		virtual std::int32_t element_size() const override;
 		virtual PlatformType platform() const override;
+
+		// manipulate
 		virtual void resize_(idx_type n) override;
 	};
 }
