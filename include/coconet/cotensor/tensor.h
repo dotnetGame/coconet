@@ -144,7 +144,7 @@ namespace coconet
 	template<class T>
 	inline idx_type CoTensor<T>::numel() const
 	{
-		return idx_type();
+		return _rep->size() - _offset;
 	}
 	template<class T>
 	inline idx_type CoTensor<T>::offset() const

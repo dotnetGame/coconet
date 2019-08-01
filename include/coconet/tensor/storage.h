@@ -24,6 +24,7 @@ namespace coconet
 		virtual const char* data_ptr() const = 0;
 		virtual DataType dtype() const = 0;
 		virtual PlatformType platform() const = 0;
+		virtual idx_type size() const = 0;
 		virtual std::int32_t element_size() const = 0;
 
 		// manipulate

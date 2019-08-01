@@ -40,6 +40,7 @@ namespace coconet
 		virtual DataType dtype() const override;
 		virtual std::int32_t element_size() const override;
 		virtual PlatformType platform() const override;
+		virtual idx_type size() const override;
 
 		// manipulate
 		virtual void resize_(idx_type n) override;

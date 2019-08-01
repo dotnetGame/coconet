@@ -119,6 +119,11 @@ namespace coconet
 		return PlatformType::CPU;
 	}
 
+	idx_type CoTensorStorage::size() const
+	{
+		return _len;
+	}
+
 	void CoTensorStorage::resize_(idx_type s)
 	{
 		if (s >= 0 && s != _len)
