@@ -30,9 +30,11 @@ namespace coconet
 		DimVector _dimensions;
 		StrideVector _strides;
 		idx_type _offset;
+		DataType _dtype;
 	public:
 		CoTensor();
 		explicit CoTensor(const DimVector& dimensions);
+		// deprecated
 		explicit CoTensor(const DimVector& dimensions, const StrideVector& strides);
 
 		CoTensor(const CoTensor& other) = delete;
@@ -82,19 +84,21 @@ namespace coconet
 
 	template<class T>
 	inline CoTensor<T>::CoTensor(const DimVector & dimensions)
-		: _rep(nullptr), _dimensions(dimensions), _strides(dimensions.size(), 0), _offset(0)
+		: _rep(nullptr), _dimensions(dimensions), _strides(dimensions.size(), 0), _offset(0), _dtype(GetDataType<T>::get())
 	{
 		idx_type cum_stride = 1;
-		for (int i = _strides.size() - 1; i >=0; --i)
+		for (idx_type i = static_cast<idx_type>(_strides.size() - 1); i >=0; --i)
 		{
 			_strides[i] = cum_stride;
 			cum_stride *= _dimensions[i];
 		}
+
+		_rep = std::make_unique<CoTensorStorage>(_dtype, cum_stride);
 	}
 
 	template<class T>
 	inline CoTensor<T>::CoTensor(const DimVector & dimensions, const StrideVector & strides)
-		: _rep(nullptr), _dimensions(dimensions), _strides(strides), _offset(0)
+		: _rep(nullptr), _dimensions(dimensions), _strides(strides), _offset(0), _dtype(GetDataType<T>::get())
 	{
 	}
 	template<class T>
@@ -112,6 +116,12 @@ namespace coconet
 	{
 		return 0;
 	}
+	template<class T>
+	inline DataType CoTensor<T>::dtype() const
+	{
+		return GetDataType<T>::get();
+	}
+
 	template<class T>
 	inline bool CoTensor<T>::equal(const ITensor & other) const
 	{

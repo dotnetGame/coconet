@@ -16,6 +16,7 @@ namespace coconet
 		std::unique_ptr<Allocator> _allocator;
 	public:
 		CoTensorStorage();
+		CoTensorStorage(DataType data_type, idx_type size = 0);
 		CoTensorStorage(const CoTensorStorage& other);
 		CoTensorStorage(CoTensorStorage&& other);
 		~CoTensorStorage();

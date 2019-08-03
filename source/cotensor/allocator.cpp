@@ -6,7 +6,10 @@ namespace coconet
 {
 	char * CoTensorAllocator::allocate(idx_type size)
 	{
-		return (char *)malloc(size);
+		if (size > 0)
+			return (char *)malloc(size);
+		else
+			return nullptr;
 	}
 
 	void CoTensorAllocator::deallocate(char * ptr)

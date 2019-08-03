@@ -6,6 +6,7 @@ SET(SOURCE_PATH ${COCONET_PATH_SOURCE}/${LIB_NAME})
 
 SET(TENSOR_LIST
     ${HEADER_PATH}/apply.h
+    ${SOURCE_PATH}/apply.cpp
     ${HEADER_PATH}/tensor.h
     ${SOURCE_PATH}/tensor.cpp
     ${HEADER_PATH}/storage.h

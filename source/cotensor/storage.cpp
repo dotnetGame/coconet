@@ -3,8 +3,15 @@
 namespace coconet
 {
 	CoTensorStorage::CoTensorStorage()
-		: _data(nullptr), _len(0), _allocator(std::make_unique<CoTensorAllocator>())
+		: _data(nullptr), _len(0), _dtype(DataType::CHAR), _allocator(std::make_unique<CoTensorAllocator>())
 	{
+	}
+
+	CoTensorStorage::CoTensorStorage(DataType data_type, idx_type size)
+		: _data(nullptr), _len(0), _dtype(data_type), _allocator(std::make_unique<CoTensorAllocator>())
+	{
+		_data = _allocator->allocate(dtype_size(data_type) * size);
+		_len = size;
 	}
 
 	CoTensorStorage::CoTensorStorage(const CoTensorStorage & other)

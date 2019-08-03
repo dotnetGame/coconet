@@ -68,6 +68,62 @@ namespace coconet
 			return 0;
 		}
 	}
+
+	template<class T>
+	struct GetDataType
+	{
+		DataType operator()() { return DataType::CHAR; }
+		static DataType get() { return DataType::CHAR; }
+	};
+
+	template<>
+	struct GetDataType<f32>
+	{
+		DataType operator()() { return DataType::FLOAT; }
+		static DataType get() { return DataType::FLOAT; }
+	};
+
+	template<>
+	struct GetDataType<f64>
+	{
+		DataType operator()() { return DataType::DOUBLE; }
+		static DataType get() { return DataType::DOUBLE; }
+	};
+
+	template<>
+	struct GetDataType<u8>
+	{
+		DataType operator()() { return DataType::BYTE; }
+		static DataType get() { return DataType::BYTE; }
+	};
+
+	template<>
+	struct GetDataType<i8>
+	{
+		DataType operator()() { return DataType::CHAR; }
+		static DataType get() { return DataType::CHAR; }
+	};
+
+	template<>
+	struct GetDataType<i16>
+	{
+		DataType operator()() { return DataType::SHORT; }
+		static DataType get() { return DataType::SHORT; }
+	};
+
+	template<>
+	struct GetDataType<i32>
+	{
+		DataType operator()() { return DataType::INT; }
+		static DataType get() { return DataType::INT; }
+	};
+
+	template<>
+	struct GetDataType<i64>
+	{
+		DataType operator()() { return DataType::LONG; }
+		static DataType get() { return DataType::LONG; }
+	};
 }
 
 
