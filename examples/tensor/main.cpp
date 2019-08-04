@@ -8,7 +8,7 @@
 int main()
 {
 	{
-		coconet::DimVector shape({ 5,4,3,2,1 });
+		coconet::tensor::DimVector shape({ 5,4,3,2,1 });
 
 		for (auto& each : shape)
 		{
@@ -19,7 +19,7 @@ int main()
 	}
 
 	{
-		coconet::DimVector shape({ 5,4,3 });
+		coconet::tensor::DimVector shape({ 5,4,3 });
 
 		for (auto& each : shape)
 		{
@@ -31,8 +31,8 @@ int main()
 	
 
 	{
-		coconet::CoTensor<coconet::f32> tensor({ 2,3,4 });
-		coconet::fill_(tensor, 1.f);
+		coconet::cotensor::CoTensor<coconet::f32> tensor({ 2,3,4 });
+		coconet::cotensor::fill_(tensor, 1.f);
 		std::cout << tensor.to_string();
 	}
 

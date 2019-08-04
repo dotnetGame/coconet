@@ -1,4 +1,4 @@
-#include <coconet/cotensor/math.h>
+#include <coconet/cotensor/blas.h>
 
 namespace coconet
 {

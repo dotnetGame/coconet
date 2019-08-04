@@ -7,24 +7,27 @@
 
 namespace coconet
 {
-	// create
-	template<class T>
-	std::shared_ptr<Variable<T>> zeros(std::initializer_list<idx_type> list)
+	namespace nn
 	{
-		return std::make_shared<Variable<T>>();
-	}
+		// create
+		template<class T>
+		std::shared_ptr<Variable<T>> zeros(std::initializer_list<idx_type> list)
+		{
+			return std::make_shared<Variable<T>>();
+		}
 
-	template<class T>
-	std::shared_ptr <Variable<T>> ones(std::initializer_list<idx_type> list)
-	{
-		return std::make_shared<Variable<T>>();
-	}
+		template<class T>
+		std::shared_ptr <Variable<T>> ones(std::initializer_list<idx_type> list)
+		{
+			return std::make_shared<Variable<T>>();
+		}
 
-	// arithmetic
-	template<class T>
-	std::shared_ptr<Variable<T>> matmul(std::shared_ptr<Variable<T>> left, std::shared_ptr<Variable<T>> right)
-	{
-		return left;
+		// arithmetic
+		template<class T>
+		std::shared_ptr<Variable<T>> matmul(std::shared_ptr<Variable<T>> left, std::shared_ptr<Variable<T>> right)
+		{
+			return left;
+		}
 	}
 
 

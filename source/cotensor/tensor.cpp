@@ -2,5 +2,7 @@
 
 namespace coconet
 {
-	
+	namespace cotensor
+	{
+    }
 }

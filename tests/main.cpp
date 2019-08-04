@@ -4,7 +4,7 @@
 
 TEST_CASE("cotensor test", "[CoTensor]")
 {
-	coconet::CoTensor<coconet::f32> v({3, 4});
+	coconet::cotensor::CoTensor<coconet::f32> v({3, 4});
 
 	REQUIRE(v.size(0) == 3);
 	REQUIRE(v.size(1) == 4);

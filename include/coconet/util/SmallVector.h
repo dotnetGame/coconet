@@ -909,7 +909,7 @@ inline size_t capacity_in_bytes(const SmallVector<T, N> &X) {
   return X.capacity_in_bytes();
 }
 
-} // end namespace llvm
+} // end namespace coconet
 
 namespace std {
 

@@ -7,13 +7,16 @@
 
 namespace coconet
 {
-	void fill_(CoTensor<f32>& tensor, f32 value);
-	void fill_(CoTensor<f64>& tensor, f64 value);
-	void fill_(CoTensor<u8>& tensor, u8 value);
-	void fill_(CoTensor<i8>& tensor, i8 value);
-	void fill_(CoTensor<i16>& tensor, i16 value);
-	void fill_(CoTensor<i32>& tensor, i32 value);
-	void fill_(CoTensor<i64>& tensor, i64 value);
+	namespace cotensor
+	{
+		void fill_(CoTensor<f32>& tensor, f32 value);
+		void fill_(CoTensor<f64>& tensor, f64 value);
+		void fill_(CoTensor<u8>& tensor, u8 value);
+		void fill_(CoTensor<i8>& tensor, i8 value);
+		void fill_(CoTensor<i16>& tensor, i16 value);
+		void fill_(CoTensor<i32>& tensor, i32 value);
+		void fill_(CoTensor<i64>& tensor, i64 value);
+	}
 }
 
 #endif
