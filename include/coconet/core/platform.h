@@ -25,29 +25,29 @@
 
 #	undef DELETE
 
-#	if defined(OCTOON_BUILD_DLL_EXPORT)
-#		define OCTOON_EXPORT __declspec(dllexport)
-#		define OCTOON_EXPORT_WINONLY __declspec(dllexport)
+#	if defined(COCONET_BUILD_DLL_EXPORT)
+#		define COCONET_EXPORT __declspec(dllexport)
+#		define COCONET_EXPORT_WINONLY __declspec(dllexport)
 #	else
-#		if defined(OCTOON_STATIC)
-#			define OCTOON_EXPORT
-#			define OCTOON_EXPORT_WINONLY
+#		if defined(COCONET_STATIC)
+#			define COCONET_EXPORT
+#			define COCONET_EXPORT_WINONLY
 #		else
-#			define OCTOON_EXPORT __declspec(dllimport)
-#			define OCTOON_EXPORT_WINONLY __declspec(dllimport)
+#			define COCONET_EXPORT __declspec(dllimport)
+#			define COCONET_EXPORT_WINONLY __declspec(dllimport)
 #		endif
 #	endif
 
-#	define OCTOON_CALL __stdcall
-#	define OCTOON_INLINE __forceinline
-#	define OCTOON_WONT_RETURN __declspec(noreturn)
+#	define COCONET_CALL __stdcall
+#	define COCONET_INLINE __forceinline
+#	define COCONET_WONT_RETURN __declspec(noreturn)
 #else
-#	define OCTOON_EXPORT __attribute__ ((visibility("default")))
-#	define OCTOON_EXPORT_WINONLY
+#	define COCONET_EXPORT __attribute__ ((visibility("default")))
+#	define COCONET_EXPORT_WINONLY
 #
-#	define OCTOON_CALL
-#	define OCTOON_INLINE inline
-#	define OCTOON_WONT_RETURN
+#	define COCONET_CALL
+#	define COCONET_INLINE inline
+#	define COCONET_WONT_RETURN
 #endif
 
 #if defined(__MINGW64__) || defined(__MINGW32__)

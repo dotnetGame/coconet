@@ -1,15 +1,15 @@
 
 #include <iostream>
-#include <coconet/nn/variable.h>
-#include <coconet/nn/function.h>
+#include <coconet/autograd/variable.h>
+#include <coconet/autograd/function.h>
 
 
 int main()
 {
 	{
-		auto a = coconet::nn::Variable<coconet::f32>::zeros({ 4,2 });
-		auto b = coconet::nn::Variable<coconet::f32>::zeros({ 2,4 });
-		auto c = coconet::nn::Variable<coconet::f32>::matmul(a, b);
+		auto a = coconet::autograd::Variable<coconet::f32>::zeros({ 4,2 });
+		auto b = coconet::autograd::Variable<coconet::f32>::ones({ 2,4 });
+		std::cout << b->to_string();
 
 	}
 	
