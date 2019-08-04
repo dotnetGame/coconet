@@ -26,6 +26,7 @@ namespace coconet
 		virtual PlatformType platform() const = 0;
 		virtual idx_type size() const = 0;
 		virtual std::int32_t element_size() const = 0;
+		virtual idx_type numel() const = 0;
 
 		// manipulate
 		virtual void resize_(idx_type n) = 0;

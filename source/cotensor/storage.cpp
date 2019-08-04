@@ -131,6 +131,11 @@ namespace coconet
 		return _len;
 	}
 
+	idx_type CoTensorStorage::numel() const
+	{
+		return _len / dtype_size(_dtype);
+	}
+
 	void CoTensorStorage::resize_(idx_type s)
 	{
 		if (s >= 0 && s != _len)

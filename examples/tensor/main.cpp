@@ -33,6 +33,7 @@ int main()
 	{
 		coconet::CoTensor<coconet::f32> tensor({ 2,3,4 });
 		coconet::fill_(tensor, 1.f);
+		std::cout << tensor.to_string();
 	}
 
     return 0;

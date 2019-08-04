@@ -18,15 +18,18 @@ namespace coconet
 		bool is_finished = false;
 
 		DimVector counter(tensor.ndimension(), 0);
-		T* cur_data = reinterpret_cast<T*>(tensor.data_ptr()) + tensor.offset();
+		T* cur_data = tensor.data_ptr() + tensor.offset();
 
 		while (!is_finished)
 		{
 			// update counter
-			for (idx_type i = tensor.ndimension() - 2; i >= 0; --i)
+			for (idx_type i = tensor.ndimension() - 1; i >= 0; --i)
 			{
-				f(*cur_data);
-				cur_data += tensor.stride(tensor.ndimension() - 1);
+				if (i == tensor.ndimension() - 1)
+				{
+					f(*cur_data);
+					cur_data += tensor.stride(tensor.ndimension() - 1);
+				}
 				++counter[i];
 				if (counter[i] == tensor.size(i))
 				{
@@ -57,7 +60,7 @@ namespace coconet
 		bool is_finished = false;
 
 		DimVector counter(tensor.ndimension(), 0);
-		T* cur_data = reinterpret_cast<T*>(tensor.data_ptr()) + tensor.offset();
+		T* cur_data = tensor.data_ptr() + tensor.offset();
 
 		while (!is_finished)
 		{
@@ -74,6 +77,7 @@ namespace coconet
 			for (idx_type i = tensor.ndimension() - 2; i >= 0; --i)
 			{
 				++counter[i];
+				cur_data += tensor.stride(i);
 				if (counter[i] == tensor.size(i))
 				{
 					counter[i] = 0;
@@ -84,7 +88,7 @@ namespace coconet
 					}
 					else
 					{
-						cur_data -= counter[i] * tensor.stride(i);
+						cur_data -= tensor.size(i) * tensor.stride(i);
 					}
 				}
 				else
@@ -143,7 +147,7 @@ namespace coconet
 		bool is_finished = false;
 
 		DimVector counter(tensor.ndimension(), 0);
-		T* cur_data = reinterpret_cast<T*>(tensor.data_ptr()) + tensor.offset();
+		T* cur_data = tensor.data_ptr() + tensor.offset();
 
 		while (!is_finished)
 		{
@@ -160,9 +164,9 @@ namespace coconet
 			for (idx_type i = tensor.ndimension() - 2; i >= 0; --i)
 			{
 				++counter[i];
+				cur_data += tensor.stride(i);
 				if (counter[i] == tensor.size(i))
 				{
-					counter[i] = 0;
 					if (i == 0)
 					{
 						is_finished = true;
@@ -170,7 +174,8 @@ namespace coconet
 					}
 					else
 					{
-						cur_data -= counter[i] * tensor.stride(i);
+						cur_data -= tensor.size(i) * tensor.stride(i);
+						counter[i] = 0;
 					}
 				}
 				else
@@ -211,8 +216,12 @@ namespace coconet
 	template<class T, class Fn>
 	void apply_contiguous(CoTensor<T>& tensor, Fn f)
 	{
+		idx_type cum_size = 1;
+		for (idx_type i = static_cast<idx_type>(tensor.ndimension() - 1); i >= 0; --i)
+			cum_size *= tensor.size(i);
+
 		T *element_ptr = tensor.data_ptr();
-		T *end_ptr = element_ptr + tensor.storage()->numel();
+		T *end_ptr = element_ptr + cum_size;
 		while (element_ptr < end_ptr)
 		{
 			f(*element_ptr);
@@ -223,7 +232,7 @@ namespace coconet
 	template<class T>
 	void fill_impl(CoTensor<T>& tensor, T value)
 	{
-		apply_simple(tensor, [&](T& item) {item = value; });
+		apply(tensor, [&](T& item) {item = value; });
 	}
 	void fill_(CoTensor<f32>& tensor, f32 value) { fill_impl(tensor, value); }
 	void fill_(CoTensor<f64>& tensor, f64 value) { fill_impl(tensor, value); }

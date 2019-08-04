@@ -1,8 +1,10 @@
 #ifndef COCONET_COTENSOR_TENSOR_H_
 #define COCONET_COTENSOR_TENSOR_H_
 
+#include <string>
 #include <memory>
 #include <stdexcept>
+#include <functional>
 
 #include <coconet/core/type.h>
 #include <coconet/tensor/tensor.h>
@@ -56,6 +58,7 @@ namespace coconet
 		PlatformType platform() const;
 		DimVector size() const;
 		idx_type size(idx_type i) const;
+		Storage& storage();
 		StrideVector stride() const;
 		idx_type stride(idx_type i) const;
 		std::string to_string() const;
@@ -183,6 +186,11 @@ namespace coconet
 			throw std::runtime_error("Dimension out of range");
 	}
 	template<class T>
+	inline Storage & CoTensor<T>::storage()
+	{
+		return *_rep;
+	}
+	template<class T>
 	inline StrideVector CoTensor<T>::stride() const
 	{
 		return _strides;
@@ -201,7 +209,33 @@ namespace coconet
 	template<class T>
 	inline std::string CoTensor<T>::to_string() const
 	{
-		return "";
+		std::function<std::string(const CoTensor<T>& t, idx_type dim, idx_type idx)> to_string_impl =
+			[&](const CoTensor<T>& t, idx_type dim, idx_type idx)->std::string {
+			std::string result;
+			if (dim == t.ndimension())
+			{
+				result += std::to_string(t.data_ptr()[idx]);
+				return result;
+			}
+
+			for (idx_type i = 0; i < t.size(dim); ++i)
+			{
+				if (dim != t.ndimension() - 1 && i != 0) result += ",\n";
+				if (dim != t.ndimension() - 1)	result += "[";
+				result += to_string_impl(t, dim + 1, idx);
+				if (i != t.size(dim) - 1 && dim == t.ndimension() - 1)
+					result += ",";
+				if (dim != t.ndimension() - 1) result += "]";
+
+				idx += t.stride(dim);
+			}
+
+			return result;
+		};
+
+		std::string result;
+		result += "[" + to_string_impl(*this, 0, offset()) + "]";
+		return result;
 	}
 }
 
