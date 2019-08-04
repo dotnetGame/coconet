@@ -1,0 +1,1 @@
+#include <coconet/nn/variable.h>
