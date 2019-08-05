@@ -9,7 +9,6 @@
 #include <coconet/tensor/index.h>
 #include <coconet/cotensor/tensor.h>
 #include <coconet/cotensor/apply.h>
-#include <coconet/autograd/function.h>
 
 namespace coconet
 {
@@ -48,19 +47,18 @@ namespace coconet
 			using reference = self_type & ;
 			using const_reference = const self_type&;
 		public:
-			Variable(tensor::DimVector dimensions);
-		public:
-			// create variable
-			static shared_pointer zeros(std::initializer_list<idx_type> list);
-			static shared_pointer ones(std::initializer_list<idx_type> list);
+			Variable(const tensor::DimVector& dimensions);
 
+		public:
+			// create
+			static std::shared_ptr<Variable<T, PlatformType::CPU>> zeros(std::initializer_list<idx_type> list);
+			static std::shared_ptr<Variable<T, PlatformType::CPU>> ones(std::initializer_list<idx_type> list);
 		public:
 			void fill_(T value);
 			std::string to_string() const;
 		private:
 			std::unique_ptr<cotensor::CoTensor<T>> _data;
 			std::unique_ptr<cotensor::CoTensor<f32>> _grad;
-			std::shared_ptr<FunctionBase> _grad_fn;
 		};
 		
 		template class Variable<f32, PlatformType::CPU>;
@@ -80,8 +78,8 @@ namespace coconet
 		using ByteVariable = Variable<u8, PlatformType::CPU>;
 
 		template<class T>
-		inline Variable<T, PlatformType::CPU>::Variable(tensor::DimVector dimensions)
-			:_data(new cotensor::CoTensor<T>(dimensions)), _grad(nullptr), _grad_fn(nullptr)
+		inline Variable<T, PlatformType::CPU>::Variable(const tensor::DimVector& dimensions)
+			:_data(new cotensor::CoTensor<T>(dimensions)), _grad(nullptr)
 		{
 		}
 

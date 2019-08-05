@@ -30,19 +30,42 @@ namespace coconet
 		public:
 			FunctionContext context;
 
-			virtual tensor::ITensor* forward(std::vector<tensor::ITensor*> inputs) = 0;
-			virtual std::vector<tensor::ITensor*> backward(tensor::ITensor* output_grad) = 0;
+			// info
+			virtual std::int32_t num_inputs() const = 0;
+			virtual std::int32_t num_outputs() const = 0;
+
+			// forward and backward
+			virtual std::vector<std::shared_ptr<IVariable>> forward(std::vector<std::shared_ptr<IVariable>> inputs) = 0;
+			virtual std::vector<std::shared_ptr<IVariable>> backward(std::vector<std::shared_ptr<IVariable>> output_grad) = 0;
 		};
 
 		class MatmulFunction : public FunctionBase
 		{
 		public:
-			virtual tensor::ITensor* forward(std::vector<tensor::ITensor*> inputs) override
+			virtual std::int32_t num_inputs() const override { return 2; }
+			virtual std::int32_t num_outputs() const override { return 1; }
+			virtual std::vector<std::shared_ptr<IVariable>> forward(std::vector<std::shared_ptr<IVariable>> inputs) override
 			{
-				return nullptr;
+				return {};
 			}
 
-			virtual std::vector<tensor::ITensor*> backward(tensor::ITensor* output_grad) override
+			virtual std::vector<std::shared_ptr<IVariable >> backward(std::vector<std::shared_ptr<IVariable>> output_grad) override
+			{
+				return {};
+			}
+		};
+
+		class AddFunction :public FunctionBase
+		{
+		public:
+			virtual std::int32_t num_inputs() const override { return 2; }
+			virtual std::int32_t num_outputs() const override { return 1; }
+			virtual std::vector<std::shared_ptr<IVariable>> forward(std::vector<std::shared_ptr<IVariable>> inputs) override
+			{
+				return {};
+			}
+
+			virtual std::vector<std::shared_ptr<IVariable>> backward(std::vector<std::shared_ptr<IVariable>> output_grad) override
 			{
 				return {};
 			}
