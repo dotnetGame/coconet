@@ -2,6 +2,7 @@
 #define COCONET_CORE_TYPE_H_
 
 #include <cstdint>
+#include <variant>
 
 namespace coconet
 {
@@ -19,6 +20,8 @@ namespace coconet
     using idx_type = i32;
     using size_type = i32;
     using device_id = i32;
+
+	using scalar_type = std::variant<i8, i16, i32, i64, u8, u16, u32, u64, f32, f64>;
 
     enum LayoutType
     {
