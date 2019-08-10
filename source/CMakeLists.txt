@@ -1,5 +1,7 @@
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
+include_directories(${COCONET_PATH_CONTRIB}/pybind11/include)
+
 if(COCONET_FEATURE_MULTI_THREAD)
     include_directories(${COCONET_PATH_CONTRIB}/taskflow)
 endif()
@@ -14,3 +16,7 @@ add_subdirectory(tensor)
 add_subdirectory(cotensor)
 add_subdirectory(autograd)
 add_subdirectory(nn)
+
+add_subdirectory(cppbind)
+add_subdirectory(pybind)
+

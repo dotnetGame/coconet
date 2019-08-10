@@ -303,7 +303,7 @@ protected:
 
 public:
   void push_back(const T &Elt) {
-    if (LLVM_UNLIKELY(this->size() >= this->capacity()))
+    if (this->size() >= this->capacity())
       this->grow();
     memcpy(reinterpret_cast<void *>(this->end()), &Elt, sizeof(T));
     this->set_size(this->size() + 1);

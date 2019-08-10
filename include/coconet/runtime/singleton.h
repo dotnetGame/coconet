@@ -1,7 +1,8 @@
 #ifndef COCONET_RUNTIME_SINGLETON_H_
 #define COCONET_RUNTIME_SINGLETON_H_
 
-#include<thread>
+#include <thread>
+#include <mutex>
 
 namespace coconet
 {

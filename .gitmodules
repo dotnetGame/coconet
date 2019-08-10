@@ -7,3 +7,6 @@
 [submodule "contrib/catch2"]
 	path = contrib/catch2
 	url = https://github.com/catchorg/Catch2.git
+[submodule "contrib/pybind11"]
+	path = contrib/pybind11
+	url = https://github.com/pybind/pybind11.git

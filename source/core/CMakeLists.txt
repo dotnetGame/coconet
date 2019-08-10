@@ -12,8 +12,3 @@ set(CORE_LIST
 
 add_library(${LIB_OUTNAME} STATIC ${CORE_LIST})
 
-target_link_libraries(${LIB_OUTNAME} coconet-util)
-target_link_libraries(${LIB_OUTNAME} coconet-tensor)
-target_link_libraries(${LIB_OUTNAME} coconet-cotensor)
-target_link_libraries(${LIB_OUTNAME} coconet-autograd)
-target_link_libraries(${LIB_OUTNAME} coconet-nn)

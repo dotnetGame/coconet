@@ -15,6 +15,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 
+# options
 option(COCONET_BUILD_TESTS "build tests" ON)
 option(COCONET_BUILD_BENCHMARK "build benchmark" ON)
 
@@ -22,6 +23,8 @@ option(COCONET_BUILD_BENCHMARK "build benchmark" ON)
 
 option(COCONET_FEATURE_SIMD "SIMD support" ON)
 option(COCONET_FEATURE_MULTI_THREAD "multi thread support" ON)
+
+option(COCONET_INTERFACE_PYTHON "python interface" ON)
 
 if(COCONET_FEATURE_SIMD)
     add_compile_definitions(COCONET_FEATURE_SIMD)
@@ -31,6 +34,8 @@ if(COCONET_FEATURE_MULTI_THREAD)
     add_compile_definitions(COCONET_FEATURE_MULTI_THREAD)
 endif()
 
+
+# sub dir
 add_subdirectory(contrib)
 add_subdirectory(source)
 add_subdirectory(examples)
