@@ -34,3 +34,9 @@
 # vscode
 .vscode
 .VSCodeCounter
+
+# python
+coconet.egg-info/
+dist/
+build/
+records.txt

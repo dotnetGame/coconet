@@ -1,8 +1,12 @@
 
+#include <vector>
+#include <algorithm>
+
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 namespace py = pybind11;
 
-
+#include <coconet/tensor/index.h>
 #include <coconet/autograd/variable.h>
 
 namespace coconet
@@ -15,6 +19,8 @@ namespace coconet
 
 			py::class_<tensor::DimVector>(m, "DimVector")
 				.def(py::init<>())
+				.def(py::init<std::size_t>())
+				.def(py::init<std::size_t, std::size_t>())
 				.def("clear", &tensor::DimVector::clear)
 				.def("pop_back", &tensor::DimVector::pop_back)
 				.def("push_back", &tensor::DimVector::push_back)
@@ -25,6 +31,9 @@ namespace coconet
 
 			py::class_<autograd::ByteVariable>(m, "ByteTensor")
 				.def(py::init<const tensor::DimVector&>())
+				.def(py::init([](std::vector<coconet::idx_type> dim){
+					return autograd::ByteVariable(tensor::DimVector(dim.cbegin(),dim.cend()));
+				}))
 				.def("fill_", &autograd::ByteVariable::fill_);
 		}
 	}
