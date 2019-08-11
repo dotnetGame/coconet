@@ -14,7 +14,7 @@ namespace coconet
 {
 	namespace autograd
 	{
-		class IVariable
+		class IVariable: public std::enable_shared_from_this<IVariable>
 		{
 		public:
 			virtual void fill_(scalar_type value) = 0;
