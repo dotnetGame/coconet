@@ -2,6 +2,7 @@
 #define COCONET_AUTOGRAD_VARIABLE_H_
 
 #include <memory>
+#include <string>
 #include <initializer_list>
 
 #include <coconet/core/type.h>
@@ -18,6 +19,7 @@ namespace coconet
 		{
 		public:
 			virtual void fill_(scalar_type value) = 0;
+			virtual std::string to_string() const = 0;
 		};
 
 		template<class T, PlatformType Platform = PlatformType::CPU>
@@ -54,10 +56,12 @@ namespace coconet
 			// create
 			static std::shared_ptr<Variable<T, PlatformType::CPU>> zeros(std::initializer_list<idx_type> list);
 			static std::shared_ptr<Variable<T, PlatformType::CPU>> ones(std::initializer_list<idx_type> list);
+			
 			// op
 			virtual void fill_(scalar_type value) override;
-		public:
-			std::string to_string() const;
+
+			// tools
+			virtual std::string to_string() const override;
 		private:
 			std::unique_ptr<cotensor::CoTensor<T>> _data;
 			std::unique_ptr<cotensor::CoTensor<f32>> _grad;
@@ -104,7 +108,7 @@ namespace coconet
 		template<class T>
 		inline void Variable<T, PlatformType::CPU>::fill_(scalar_type value)
 		{
-			cotensor::fill_(*_data, std::get<T>(value));
+			cotensor::fill_(*_data, ScalarTo<T>::to(value));
 		}
 
 		template<class T>

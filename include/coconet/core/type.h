@@ -127,6 +127,20 @@ namespace coconet
 		DataType operator()() { return DataType::LONG; }
 		static DataType get() { return DataType::LONG; }
 	};
+
+	template<class T>
+	class ScalarTo
+	{
+	public:
+		static T to(scalar_type v)
+		{
+			T ret;
+			std::visit([&](auto&& arg){
+				ret = static_cast<T>(arg);
+			}, v);
+			return ret;
+		}
+	};
 }
 
 
