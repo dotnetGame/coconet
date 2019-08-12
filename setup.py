@@ -58,7 +58,7 @@ class CMakeBuild(build_ext):
 
 setup(
     name='coconet',
-    version='0.0.1a1.dev4',
+    version='0.0.1a1.dev5',
     author='Jun Wang',
     author_email='jstzwj@aliyun.com',
     description='A deep learning platform',

@@ -67,14 +67,6 @@ namespace coconet
 			std::unique_ptr<cotensor::CoTensor<T>> _data;
 			std::unique_ptr<cotensor::CoTensor<f32>> _grad;
 		};
-		
-		template class Variable<f32, PlatformType::CPU>;
-		template class Variable<f64, PlatformType::CPU>;
-		template class Variable<i8, PlatformType::CPU>;
-		template class Variable<i16, PlatformType::CPU>;
-		template class Variable<i32, PlatformType::CPU>;
-		template class Variable<i64, PlatformType::CPU>;
-		template class Variable<u8, PlatformType::CPU>;
 
 		using FloatVariable = Variable<f32, PlatformType::CPU>;
 		using DoubleVariable = Variable<f64, PlatformType::CPU>;
@@ -83,43 +75,6 @@ namespace coconet
 		using IntVariable = Variable<i32, PlatformType::CPU>;
 		using LongVariable = Variable<i64, PlatformType::CPU>;
 		using ByteVariable = Variable<u8, PlatformType::CPU>;
-
-		template<class T>
-		inline Variable<T, PlatformType::CPU>::Variable(const tensor::DimVector& dimensions)
-			:_data(new cotensor::CoTensor<T>(dimensions)), _grad(nullptr)
-		{
-		}
-
-		template<class T>
-		inline std::shared_ptr<Variable<T, PlatformType::CPU>> Variable<T, PlatformType::CPU>::zeros(std::initializer_list<idx_type> list)
-		{
-			std::shared_ptr<Variable<T, PlatformType::CPU>> ret(new Variable<T, PlatformType::CPU>(list));
-			ret->fill_(static_cast<T>(0));
-			return ret;
-		}
-
-		template<class T>
-		inline std::shared_ptr<Variable<T, PlatformType::CPU>> Variable<T, PlatformType::CPU>::ones(std::initializer_list<idx_type> list)
-		{
-			std::shared_ptr<Variable<T, PlatformType::CPU>> ret(new Variable<T, PlatformType::CPU>(list));
-			ret->fill_(static_cast<T>(1));
-			return ret;
-		}
-
-		template<class T>
-		inline void Variable<T, PlatformType::CPU>::fill_(scalar_type value)
-		{
-			cotensor::fill_(*_data, ScalarTo<T>::to(value));
-		}
-
-		template<class T>
-		inline std::string Variable<T, PlatformType::CPU>::to_string() const
-		{
-			std::string ret;
-			if (_data)
-				ret = _data->to_string();
-			return ret;
-		}
 
 		inline std::shared_ptr<autograd::IVariable> create_variable(const tensor::DimVector& dimensions, coconet::DataType dtype, coconet::PlatformType platform)
 		{

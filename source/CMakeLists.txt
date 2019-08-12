@@ -1,5 +1,6 @@
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
+include_directories(${COCONET_PATH_CONTRIB}/fmt/include)
 include_directories(${COCONET_PATH_CONTRIB}/pybind11/include)
 
 if(COCONET_FEATURE_MULTI_THREAD)

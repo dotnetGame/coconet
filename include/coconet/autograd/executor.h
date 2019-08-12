@@ -59,7 +59,10 @@ namespace coconet
 
         class Executor
         {
-
+        public:
+			static std::vector<Node> topology_sort(const VariableGraph& graph);
+            static VariableGraph collect_backward_subgraph(const VariableGraph& graph, const Node& root);
+			static void backward(const VariableGraph& graph, const Node& root);
         };
     }
 }

@@ -342,5 +342,19 @@ namespace coconet
 		void add_scalar_(CoTensor<i16>& tensor, i16 value) { add_scalar_impl(tensor, value); }
 		void add_scalar_(CoTensor<i32>& tensor, i32 value) { add_scalar_impl(tensor, value); }
 		void add_scalar_(CoTensor<i64>& tensor, i64 value) { add_scalar_impl(tensor, value); }
+
+
+		template<class T>
+		void mul_scalar_impl(CoTensor<T>& tensor, T value)
+		{
+			apply(tensor, [&](T& item) {item += value; });
+		}
+		void mul_scalar_(CoTensor<f32>& tensor, f32 value) { mul_scalar_impl(tensor, value); }
+		void mul_scalar_(CoTensor<f64>& tensor, f64 value) { mul_scalar_impl(tensor, value); }
+		void mul_scalar_(CoTensor<u8>& tensor, u8 value) { mul_scalar_impl(tensor, value); }
+		void mul_scalar_(CoTensor<i8>& tensor, i8 value) { mul_scalar_impl(tensor, value); }
+		void mul_scalar_(CoTensor<i16>& tensor, i16 value) { mul_scalar_impl(tensor, value); }
+		void mul_scalar_(CoTensor<i32>& tensor, i32 value) { mul_scalar_impl(tensor, value); }
+		void mul_scalar_(CoTensor<i64>& tensor, i64 value) { mul_scalar_impl(tensor, value); }
 	}
 }
