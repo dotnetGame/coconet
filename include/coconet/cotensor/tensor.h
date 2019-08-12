@@ -30,7 +30,7 @@ namespace coconet
 			using reference = self_type & ;
 			using const_reference = const self_type&;
 		private:
-			std::unique_ptr<CoTensorStorage> _rep;
+			std::shared_ptr<CoTensorStorage> _rep;
 			tensor::DimVector _dimensions;
 			tensor::StrideVector _strides;
 			idx_type _offset;
@@ -98,7 +98,7 @@ namespace coconet
 				cum_stride *= _dimensions[i];
 			}
 
-			_rep = std::make_unique<CoTensorStorage>(_dtype, cum_stride);
+			_rep = std::make_shared<CoTensorStorage>(_dtype, cum_stride);
 		}
 
 		template<class T>

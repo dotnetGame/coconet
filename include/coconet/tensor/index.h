@@ -19,6 +19,28 @@ namespace coconet
         using DimVector = SmallVector<idx_type, 5>;
         using StrideVector = SmallVector<idx_type, 5>;
 
+        struct Slice
+        {
+            Slice(idx_type begin, idx_type end)
+                :start(begin), finnish(end)
+            {
+
+            }
+
+            Slice(idx_type begin, idx_type end, idx_type st)
+                :start(begin), finnish(end), step(st)
+            {
+
+            }
+
+            idx_type start;
+            idx_type finnish;
+            idx_type step;
+
+        };
+
+        using SliceVector = SmallVector<Slice, 5>;
+
         inline DimVector sort_index(DimVector dim)
         {
             DimVector sorted(dim.size());

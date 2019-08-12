@@ -16,8 +16,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # options
-option(COCONET_BUILD_TESTS "build tests" ON)
-option(COCONET_BUILD_BENCHMARK "build benchmark" ON)
+option(COCONET_BUILD_TESTS "build tests" OFF)
+option(COCONET_BUILD_EXAMPLES "build examples" OFF)
+option(COCONET_BUILD_BENCHMARK "build benchmark" OFF)
 
 # option(COCONET_OPENMP "openmp support" OFF)
 
@@ -38,7 +39,9 @@ endif()
 # sub dir
 add_subdirectory(contrib)
 add_subdirectory(source)
-add_subdirectory(examples)
+if(COCONET_BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
 if(COCONET_BUILD_TESTS)
     add_subdirectory(tests)
 endif()

@@ -4,6 +4,7 @@
 #include <algorithm>
 
 #include <pybind11/pybind11.h>
+#include <pybind11/operators.h>
 #include <pybind11/stl.h>
 namespace py = pybind11;
 
@@ -93,7 +94,10 @@ namespace coconet
 					return autograd::FloatVariable(tensor::DimVector(dim.cbegin(),dim.cend()));
 				}))
 				.def("fill_", &autograd::FloatVariable::fill_)
-				.def("__str__", &autograd::FloatVariable::to_string);
+				.def("__str__", &autograd::FloatVariable::to_string)
+				.def("__getitem__", [](const autograd::FloatVariable &variable, std::vector<std::variant<py::slice, idx_type>> indices) {
+
+				});
 
 			py::class_<autograd::DoubleVariable, std::shared_ptr<autograd::DoubleVariable>>(m, "DoubleVariable")
 				.def(py::init<const tensor::DimVector&>())
@@ -107,17 +111,7 @@ namespace coconet
 				auto dimvector = tensor::DimVector(dim.cbegin(), dim.cend());
 				auto session = runtime::Singleton<autograd::VariableGraph>::getInstance();
 
-				auto ret = std::shared_ptr<autograd::IVariable>(nullptr);
-				if (platform == coconet::PlatformType::CPU){
-					if (dtype == coconet::DataType::BYTE) {
-						ret = std::make_shared<autograd::Variable<coconet::u8, coconet::PlatformType::CPU>>(dimvector);
-					} else {
-						throw std::runtime_error("Unsupported dtype");
-					}
-				} else {
-					throw std::runtime_error("Unsupported platform");
-				}
-				
+				auto ret = autograd::create_variable(dimvector, dtype, platform);
 				ret->fill_(0);
 				if (require_grad)
 					session.add_variable(ret);

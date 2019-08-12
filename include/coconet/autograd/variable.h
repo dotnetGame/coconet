@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <string>
+#include <stdexcept>
 #include <initializer_list>
 
 #include <coconet/core/type.h>
@@ -117,6 +118,51 @@ namespace coconet
 			std::string ret;
 			if (_data)
 				ret = _data->to_string();
+			return ret;
+		}
+
+		inline std::shared_ptr<autograd::IVariable> create_variable(const tensor::DimVector& dimensions, coconet::DataType dtype, coconet::PlatformType platform)
+		{
+			auto ret = std::shared_ptr<autograd::IVariable>(nullptr);
+			if (platform == coconet::PlatformType::CPU)
+			{
+				if (dtype == coconet::DataType::BYTE)
+				{
+					ret = std::make_shared<autograd::Variable<coconet::u8, coconet::PlatformType::CPU>>(dimensions);
+				}
+				else if (dtype == coconet::DataType::CHAR)
+				{
+					ret = std::make_shared<autograd::Variable<coconet::i8, coconet::PlatformType::CPU>>(dimensions);
+				}
+				else if (dtype == coconet::DataType::SHORT)
+				{
+					ret = std::make_shared<autograd::Variable<coconet::i16, coconet::PlatformType::CPU>>(dimensions);
+				}
+				else if (dtype == coconet::DataType::INT)
+				{
+					ret = std::make_shared<autograd::Variable<coconet::i32, coconet::PlatformType::CPU>>(dimensions);
+				}
+				else if (dtype == coconet::DataType::LONG)
+				{
+					ret = std::make_shared<autograd::Variable<coconet::i64, coconet::PlatformType::CPU>>(dimensions);
+				}
+				else if (dtype == coconet::DataType::FLOAT)
+				{
+					ret = std::make_shared<autograd::Variable<coconet::f32, coconet::PlatformType::CPU>>(dimensions);
+				}
+				else if (dtype == coconet::DataType::DOUBLE)
+				{
+					ret = std::make_shared<autograd::Variable<coconet::f64, coconet::PlatformType::CPU>>(dimensions);
+				}
+				else
+				{
+					throw std::runtime_error("Unsupported dtype");
+				}
+			}
+			else
+			{
+				throw std::runtime_error("Unsupported platform");
+			}
 			return ret;
 		}
 	}

@@ -17,6 +17,8 @@ SET(TENSOR_LIST
     ${SOURCE_PATH}/allocator.cpp
     ${HEADER_PATH}/blas.h
     ${SOURCE_PATH}/blas.cpp
+    ${HEADER_PATH}/view.h
+    ${SOURCE_PATH}/view.cpp
 )
 
 ADD_LIBRARY(${LIB_OUTNAME} ${TENSOR_LIST})
