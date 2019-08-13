@@ -16,6 +16,14 @@ namespace coconet
 {
 	namespace autograd
 	{
+		class GradMeta
+		{
+		public:
+
+		private:
+		
+		};
+
 		class IVariable: public std::enable_shared_from_this<IVariable>
 		{
 		public:
